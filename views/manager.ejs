@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">       
+    <title><%= title %></title>
+  
+    <link rel="stylesheet" type="text/css" href="/stylesheets/bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" href="/stylesheets/signin.css" />
+  </head>
+
+  <body>
+
+    <div id="container1" class="container1">
+       <% if (locals.success) { %> 
+          <div id="alt_sucess" class="alert alert-success"> 
+            <%- success %> 
+          </div> 
+       <% } %> 
+
+      <% if (locals.error) { %> 
+        <div id="alt_warning" class="alert alert-warning"> 
+          <%= error %> 
+        </div> 
+      <% } %> 
+
+      <form class="form-signin" role="form" method="post">
+        <h2 class="form-signin-heading">题目上传</h2>
+
+        <input id="txtquestion_id" name="txtquestion_id" type="text" class="form-control" placeholder="题号" required autofocus />
+        <input id="txtquestion_con" name="txtquestion_con" type="text" class="form-control" placeholder="题干" required/>
+        <input id="txtanswer_A"  name="txtanswer_A" type="text" class="form-control" placeholder="答案A" required/>  
+        <input id="txtanswer_B"  name="txtanswer_B" type="text" class="form-control" placeholder="答案B" required/> 
+        <input id="txtanswer_C"  name="txtanswer_C" type="text" class="form-control" placeholder="答案C" required/> 
+        <input id="txtanswer_D"  name="txtanswer_D" type="text" class="form-control" placeholder="答案D" required/> 
+        <button id="btnSub1" class="btn btn-lg btn-primary" type="submit">题目上传</button>
+        <button id="btnSub1" class="btn btn-lg btn-primary" type="button">DOC文件上传</button>
+      </form>  
+      
+    </div> 
+  </body>
+</html>
+
+<script src="/javascripts/jquery.min.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+     String.prototype.format = function (args) {
+            var result = this;
+            if (arguments.length > 0) {
+                if (arguments.length == 1 && typeof (args) == "object") {
+                    for (var key in args) {
+                        if (args[key] != undefined) {
+                            var reg = new RegExp("({" + key + "})", "g");
+                            result = result.replace(reg, args[key]);
+                        }
+                    }
+                }
+                else {
+                    for (var i = 0; i < arguments.length; i++) {
+                        if (arguments[i] != undefined) {
+                            var reg = new RegExp("({)" + i + "(})", "g");
+                            result = result.replace(reg, arguments[i]);
+                        }
+                    }
+                }
+            }
+            return result;
+    }
+
+    $(function(){
+        $('#btnSub1').on('click',function(){
+            var 
+            $txtquestion_id = $('#txtquestion_id'),
+            txtquestion_idVal = $.trim($txtquestion_id.val()),            
+            $txtquestion_con = $('#txtquestion_con'),
+            txtquestion_conVal = $.trim($txtquestion_con.val()),
+            $txtanswer_A = $('#txtanswer_A'),
+            txtanswer_AVal = $.trim($txtanswer_A.val()),
+            $txtanswer_B = $('#txtanswer_B'),
+            txtanswer_BVal = $.trim($txtanswer_B.val()),
+            $txtanswer_C = $('#txtanswer_C'),
+            txtanswer_CVal = $.trim($txtanswer_C.val()),
+            $txtanswer_D = $('#txtanswer_D'),
+            txtanswer_DVal = $.trim($txtanswer_D.val()), 
+                       
+            errorTip = '<div id="errorTip" class="alert alert-warning">{0}</div> ';
+
+            $("#errorTip,#alt_sucess,#alt_warning").remove();
+            
+            if(txtquestion_idVal.length == 0)
+            {
+                $("#container1").prepend(errorTip.format('问题id不能为空'));                
+                $txtquestion_id.focus();
+                return false;
+            }
+
+            if(txtquestion_conVal.length == 0)
+            {                
+                $("#container1").prepend(errorTip.format('问题题干不能为空'));
+                $txtquestion_con.focus();
+                return false;
+            }
+
+            if(txtanswer_AVal.length == 0)
+            {
+                $("#container1").prepend(errorTip.format('答案A不能为空'));                
+                $txtanswer_A.focus();
+                return false;
+            }
+
+             if(txtanswer_BVal.length == 0)
+            {
+                $("#container1").prepend(errorTip.format('答案B不能为空'));                
+                $txtanswer_B.focus();
+                return false;
+            }
+
+            if(txtanswer_CVal.length == 0)
+            {
+                $("#container1").prepend(errorTip.format('答案C不能为空'));                
+                $txtanswer_C.focus();
+                return false;
+            }
+
+            if(txtanswer_DVal.length == 0)
+            {
+                $("#container1").prepend(errorTip.format('答案D不能为空'));                
+                $txtanswer_D.focus();
+                return false;
+            }
+
+            return true;
+        })
+    });
+
+</script>

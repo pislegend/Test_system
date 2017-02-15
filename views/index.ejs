@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">           
+      <title><%= title %></title>
+    <link rel="stylesheet" type="text/css" href="/stylesheets/bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" href="/stylesheets/navbar-static-top.css" /> 
+    <script src="/javascripts/jquery-3.1.1.min.js"></script>
+    <script src="/javascripts/bootstrap.min.js"></script>
+  </head>
+  <body id="tar">
+      <% include header %> 
+  
+    <div id="question_num" class="pannel pannel-default">
+      <table class="table table-bordered">
+        <tr>
+          <td width="21.2%" align="center">
+            <div class="btn-toolbar" role="toolbar">
+               <div class="btn-group">
+                 <button id="btn1" type="button"  class="tm" class="btn btn-default" value="1" >第1题</button>
+                 <button id="btn2" type="button" class="tm"  class="btn btn-default" value="2" >第2题</button>
+                 <button id="btn3" type="button"  class="tm" class="btn btn-default" value="3" >第3题</button>
+                 <button id="btn4" type="button" class="tm"  class="btn btn-default" value="4" >第4题</button>
+               </div>
+               <div class="btn-group">
+                 <button id="btn5" type="button"  class="tm" class="btn btn-default" value="5" >第5题</button>
+                 <button id="btn6" type="button" class="tm"  class="btn btn-default" value="6" >第6题</button>
+                 <button id="btn7" type="button"  class="tm" class="btn btn-default" value="7" >第7题</button>
+               </div>
+          </div>
+          </td>
+          <td width="78.8%" align="center" id="test">
+   <!--        <div id="question_content" class="pannel pannel-default" align="left">
+            <%= question[0].Q_ID%>
+            、
+            <%= question[0].Q%></br>
+            <%= question[0].A%></br>
+            <%= question[0].B%></br>
+            <%= question[0].C%></br>
+            <%= question[0].D%></br>
+          </div> -->
+            <table  class="table table-bordered" >
+            <tr><td  id="question_id" value="Q">
+              
+            </td></tr>
+            <tr><td id="A">  
+
+                  <input type="radio"  name="optionsRadios" id="optionsRadios1" value="option1" >
+
+
+            </td> </tr>
+            <tr><td id="B">
+              
+
+                 <input type="radio"  name="optionsRadios" id="optionsRadios2" value="option2" >
+
+            
+            </td> </tr>
+            <tr><td id="C">
+               
+
+                 <input type="radio"  name="optionsRadios" id="optionsRadios3" value="option3" >
+                
+
+            
+            </td> </tr>
+            <tr><td id="D">
+               
+
+                 <input type="radio"  name="optionsRadios" id="optionsRadios4" value="option4" >
+                
+
+            </td> </tr>
+            </table>
+          </td>
+        </tr>
+      </table>
+    </div>
+
+
+  </body>
+</html>
+
+
+
+<script type="text/javascript">
+
+ var tms = $('.tm')//为所有class为tm的button注册click事件
+ tms.on('click',function(){
+    getQuestionById(this.value-1);
+  });
+
+	function getQuestionById(str){
+
+    
+    var strid = str;
+
+    var id = 0;
+    var disdata = <%- question %>;//=与-号的区别：=会进行escape字符转换，例如将“双引号转换为&34;”；而-则不会进行字符串
+
+    var disdataQ = str + 1 + '、' +disdata[str].Q;//JS调用render参数的方法
+    var disdataA = disdata[str].A;
+    var disdataB = disdata[str].B;
+    var disdataC = disdata[str].C;
+    var disdataD = disdata[str].D;
+
+    $('#question_id').html(disdataQ) ;//#必须有，其意义是找到所有此id的元素
+    $('#A').html(disdataA) ;
+    $('#B').html(disdataB) ;
+    $('#C').html(disdataC) ;
+    $('#D').html(disdataD) ;
+
+  }
+	
+
+
+</script>
+
